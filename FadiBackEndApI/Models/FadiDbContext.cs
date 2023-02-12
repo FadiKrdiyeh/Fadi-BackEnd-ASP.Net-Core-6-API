@@ -18,6 +18,17 @@ namespace FadiBackEndApI.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Model.SetMaxIdentifierLength(30);
+
+            // ---------------------------------------------------------------------------
+
+            modelBuilder.Entity<Department>().HasData(
+                    new Department { Id = 1, Name = "Administration" },
+                    new Department { Id = 2, Name = "Sales" },
+                    new Department { Id = 3, Name = "IT" }
+                );
+
+            // ---------------------------------------------------------------------------
 
             modelBuilder.Entity<IdentityUser>(entity =>
             {

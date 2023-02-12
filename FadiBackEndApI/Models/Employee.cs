@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FadiBackEndApI.Models
 {
@@ -27,12 +28,10 @@ namespace FadiBackEndApI.Models
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 
-        [DataType(DataType.Date, ErrorMessage = "This value not valid for date type!")]
-        public DateOnly Birthdate { get; set; }
+        public int Salary { get; set; }
 
-        [DataType(DataType.Date, ErrorMessage = "This value not valid for date type!")]
-        public DateOnly HireDate { get; set; }
-
-        public Department DepartmentId { get; set; }
+        [ForeignKey("Department")]
+        public int DepartmentId { get; set; }
+        public virtual Department Department { get; set; }
     }
 }
