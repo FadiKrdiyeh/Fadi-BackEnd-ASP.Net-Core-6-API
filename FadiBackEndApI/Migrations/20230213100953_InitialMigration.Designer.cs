@@ -12,7 +12,7 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace FadiBackEndApI.Migrations
 {
     [DbContext(typeof(FadiDbContext))]
-    [Migration("20230212185754_InitialMigration")]
+    [Migration("20230213100953_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -27,48 +27,48 @@ namespace FadiBackEndApI.Migrations
 
             modelBuilder.Entity("FadiBackEndApI.Models.Department", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("DepartmentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("NUMBER(10)");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DepartmentId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("NVARCHAR2(2000)");
 
-                    b.HasKey("Id");
+                    b.HasKey("DepartmentId");
 
                     b.ToTable("Departments", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            DepartmentId = 1,
                             Name = "Administration"
                         },
                         new
                         {
-                            Id = 2,
+                            DepartmentId = 2,
                             Name = "Sales"
                         },
                         new
                         {
-                            Id = 3,
+                            DepartmentId = 3,
                             Name = "IT"
                         });
                 });
 
             modelBuilder.Entity("FadiBackEndApI.Models.Employee", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("EmployeeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("RAW(16)");
 
                     b.Property<string>("Address")
                         .HasColumnType("NVARCHAR2(2000)");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int>("FDepartmentId")
                         .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("FirstName")
@@ -88,9 +88,9 @@ namespace FadiBackEndApI.Migrations
                     b.Property<int>("Salary")
                         .HasColumnType("NUMBER(10)");
 
-                    b.HasKey("Id");
+                    b.HasKey("EmployeeId");
 
-                    b.HasIndex("DepartmentId");
+                    b.HasIndex("FDepartmentId");
 
                     b.ToTable("Employees", (string)null);
                 });
@@ -297,7 +297,7 @@ namespace FadiBackEndApI.Migrations
                 {
                     b.HasOne("FadiBackEndApI.Models.Department", "Department")
                         .WithMany("Employees")
-                        .HasForeignKey("DepartmentId")
+                        .HasForeignKey("FDepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

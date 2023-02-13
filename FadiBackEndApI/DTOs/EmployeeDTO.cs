@@ -7,7 +7,7 @@ namespace FadiBackEndApI.DTOs
 {
     public class EmployeeDTO
     {
-        public Guid Id { get; set; }
+        public Guid EmployeeId { get; set; }
 
         public string FirstName { get; set; }
 
@@ -19,7 +19,7 @@ namespace FadiBackEndApI.DTOs
 
         public string Salary { get; set; }
 
-        public int DepartmentId { get; set; }
+        public int FDepartmentId { get; set; }
         public string DepartmentName { get; set; }
     }
 }

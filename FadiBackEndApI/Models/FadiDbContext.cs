@@ -23,9 +23,9 @@ namespace FadiBackEndApI.Models
             // ---------------------------------------------------------------------------
 
             modelBuilder.Entity<Department>().HasData(
-                    new Department { Id = 1, Name = "Administration" },
-                    new Department { Id = 2, Name = "Sales" },
-                    new Department { Id = 3, Name = "IT" }
+                    new Department { DepartmentId = 1, Name = "Administration" },
+                    new Department { DepartmentId = 2, Name = "Sales" },
+                    new Department { DepartmentId = 3, Name = "IT" }
                 );
 
             // ---------------------------------------------------------------------------

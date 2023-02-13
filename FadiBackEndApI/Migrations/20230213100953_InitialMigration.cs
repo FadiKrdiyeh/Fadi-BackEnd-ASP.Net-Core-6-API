@@ -17,13 +17,13 @@ namespace FadiBackEndApI.Migrations
                 name: "Departments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    DepartmentId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                         .Annotation("Oracle:Identity", "START WITH 4 INCREMENT BY 1"),
                     Name = table.Column<string>(type: "NVARCHAR2(2000)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Departments", x => x.Id);
+                    table.PrimaryKey("PK_Departments", x => x.DepartmentId);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,22 +69,22 @@ namespace FadiBackEndApI.Migrations
                 name: "Employees",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "RAW(16)", nullable: false),
+                    EmployeeId = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     FirstName = table.Column<string>(type: "NVARCHAR2(15)", maxLength: 15, nullable: false),
                     LastName = table.Column<string>(type: "NVARCHAR2(20)", maxLength: 20, nullable: true),
                     Address = table.Column<string>(type: "NVARCHAR2(2000)", nullable: true),
                     Phone = table.Column<string>(type: "NVARCHAR2(10)", maxLength: 10, nullable: false),
                     Salary = table.Column<int>(type: "NUMBER(10)", nullable: false),
-                    DepartmentId = table.Column<int>(type: "NUMBER(10)", nullable: false)
+                    FDepartmentId = table.Column<int>(type: "NUMBER(10)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employees", x => x.Id);
+                    table.PrimaryKey("PK_Employees", x => x.EmployeeId);
                     table.ForeignKey(
-                        name: "FK_Employees_Departments_Depa~",
-                        column: x => x.DepartmentId,
+                        name: "FK_Employees_Departments_FDep~",
+                        column: x => x.FDepartmentId,
                         principalTable: "Departments",
-                        principalColumn: "Id",
+                        principalColumn: "DepartmentId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -196,7 +196,7 @@ namespace FadiBackEndApI.Migrations
 
             migrationBuilder.InsertData(
                 table: "Departments",
-                columns: new[] { "Id", "Name" },
+                columns: new[] { "DepartmentId", "Name" },
                 values: new object[,]
                 {
                     { 1, "Administration" },
@@ -205,9 +205,9 @@ namespace FadiBackEndApI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employees_DepartmentId",
+                name: "IX_Employees_FDepartmentId",
                 table: "Employees",
-                column: "DepartmentId");
+                column: "FDepartmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",

@@ -7,7 +7,7 @@ namespace FadiBackEndApI.Models
     public class Employee
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid EmployeeId { get; set; }
 
         [Required(ErrorMessage = "First name is required!")]
         [DisplayName("First name")]
@@ -31,7 +31,7 @@ namespace FadiBackEndApI.Models
         public int Salary { get; set; }
 
         [ForeignKey("Department")]
-        public int DepartmentId { get; set; }
+        public int FDepartmentId { get; set; }
         public virtual Department Department { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace FadiBackEndApI.Models
         }
 
         [Key]
-        public int Id { get; set; }
+        public int DepartmentId { get; set; }
 
         [Required(ErrorMessage = "Department name is required!")]
         [MinLength(2, ErrorMessage = "Department name can't be less than 2 characters!")]

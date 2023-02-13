@@ -87,7 +87,7 @@ namespace FadiBackEndApI.Controllers
 
                 Department createDepartment = await _departmentService.CreateDepartment(department);
 
-                if (createDepartment.Id == 0)
+                if (createDepartment.DepartmentId == 0)
                 {
                     response = new ResponseApi<DepartmentDTO>() { Status = false, Message = "Could not create department" };
                 }
@@ -117,7 +117,7 @@ namespace FadiBackEndApI.Controllers
 
                 Department updateDepartment = await _departmentService.UpdateDepartment(department);
 
-                if (department.Id == 0)
+                if (department.DepartmentId == 0)
                 {
                     response = new ResponseApi<DepartmentDTO>() { Status = false, Message = "Could not update department" };
                 }

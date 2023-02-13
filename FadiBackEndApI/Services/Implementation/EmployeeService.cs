@@ -34,7 +34,7 @@ namespace FadiBackEndApI.Services.Implementation
             try
             {
                 Employee? employee = new Employee();
-                employee = await _fadiDbContext.Employees.Include(department => department.Department).Where(emp => emp.Id == id).FirstOrDefaultAsync();
+                employee = await _fadiDbContext.Employees.Include(department => department.Department).Where(emp => emp.EmployeeId == id).FirstOrDefaultAsync();
                 return employee;
             }
             catch(Exception ex)
@@ -47,7 +47,7 @@ namespace FadiBackEndApI.Services.Implementation
         {
             try
             {
-                employee.Id = Guid.NewGuid();
+                employee.EmployeeId = Guid.NewGuid();
                 _fadiDbContext.Employees.Add(employee);
                 await _fadiDbContext.SaveChangesAsync();
                 return employee;

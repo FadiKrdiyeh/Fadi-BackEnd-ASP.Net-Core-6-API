@@ -32,7 +32,7 @@ namespace FadiBackEndApI.Services.Implementation
             try
             {
                 Department? department = new Department();
-                department = await _fadiDbContext.Departments.FirstOrDefaultAsync(dept => dept.Id == id);
+                department = await _fadiDbContext.Departments.FirstOrDefaultAsync(dept => dept.DepartmentId == id);
                 return department;
             }
             catch (Exception ex)

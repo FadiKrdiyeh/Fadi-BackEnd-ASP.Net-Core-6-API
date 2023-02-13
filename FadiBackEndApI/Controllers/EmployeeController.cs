@@ -88,7 +88,7 @@ namespace FadiBackEndApI.Controllers
                 Employee employee = _mapper.Map<Employee>(employeeDTO);
                 Employee createdEmployee = await _employeeService.CreateEmployee(employee);
 
-                if (createdEmployee.Id == Guid.Empty)
+                if (createdEmployee.EmployeeId == Guid.Empty)
                 {
                     response = new ResponseApi<EmployeeDTO>() { Status = false, Message = "Could not create employee" };
                 }
@@ -116,7 +116,7 @@ namespace FadiBackEndApI.Controllers
                 Employee employee = _mapper.Map<Employee>(employeeDTO);
                 Employee updatedEmployee = await _employeeService.UpdateEmployee(employee);
 
-                if (updatedEmployee.Id == Guid.Empty)
+                if (updatedEmployee.EmployeeId == Guid.Empty)
                 {
                     response = new ResponseApi<EmployeeDTO>() { Status = false, Message = "Could not update employee" };
                 }
