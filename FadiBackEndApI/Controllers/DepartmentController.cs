@@ -33,7 +33,7 @@ namespace FadiBackEndApI.Controllers
                 {
                     List<DepartmentDTO> departmentDTOs = _mapper.Map<List<DepartmentDTO>>(departments);
                     response = new ResponseApi<List<DepartmentDTO>>() { Status = true, Message = "Ok", Value = departmentDTOs };
-                } 
+                }
                 else
                 {
                     response = new ResponseApi<List<DepartmentDTO>>() { Status = false, Message = "No departments found" };
@@ -41,7 +41,7 @@ namespace FadiBackEndApI.Controllers
 
                 return StatusCode(StatusCodes.Status200OK, response);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response = new ResponseApi<List<DepartmentDTO>>() { Status = false, Message = ex.Message };
                 return StatusCode(StatusCodes.Status500InternalServerError, response);
@@ -49,10 +49,10 @@ namespace FadiBackEndApI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDepartment([FromRoute]int id)
+        public async Task<IActionResult> GetDepartment([FromRoute] int id)
         {
             ResponseApi<DepartmentDTO> response = new ResponseApi<DepartmentDTO>();
-        
+
             try
             {
                 Department department = await _departmentService.GetDepartment(id);
@@ -71,13 +71,13 @@ namespace FadiBackEndApI.Controllers
             }
             catch (Exception ex)
             {
-                response = new ResponseApi<DepartmentDTO>() { Status = false, Message = ex.Message};
+                response = new ResponseApi<DepartmentDTO>() { Status = false, Message = ex.Message };
                 return StatusCode(StatusCodes.Status500InternalServerError, response);
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDepartment([FromBody]DepartmentDTO departmentDTO)
+        public async Task<IActionResult> CreateDepartment([FromBody] DepartmentDTO departmentDTO)
         {
             ResponseApi<DepartmentDTO> response = new ResponseApi<DepartmentDTO>();
 
@@ -100,14 +100,14 @@ namespace FadiBackEndApI.Controllers
             }
             catch (Exception ex)
             {
-                response = new ResponseApi<DepartmentDTO>() { Status = false, Message = ex.Message};
+                response = new ResponseApi<DepartmentDTO>() { Status = false, Message = ex.Message };
                 return StatusCode(StatusCodes.Status500InternalServerError, response);
             }
         }
 
         [HttpPut]
         //[Route("{id}")]
-        public async Task<IActionResult> UpdateDepartment([FromBody]DepartmentDTO departmentDTO)
+        public async Task<IActionResult> UpdateDepartment([FromBody] DepartmentDTO departmentDTO)
         {
             ResponseApi<DepartmentDTO> response = new ResponseApi<DepartmentDTO>();
 
@@ -130,14 +130,14 @@ namespace FadiBackEndApI.Controllers
             }
             catch (Exception ex)
             {
-                response = new ResponseApi<DepartmentDTO>() { Status = false, Message = ex.Message};
+                response = new ResponseApi<DepartmentDTO>() { Status = false, Message = ex.Message };
                 return StatusCode(StatusCodes.Status500InternalServerError, response);
             }
         }
 
         [HttpDelete("{id}")]
         //[Route("{id}")]
-        public async Task<IActionResult> DeleteDepartment([FromRoute]int id)
+        public async Task<IActionResult> DeleteDepartment([FromRoute] int id)
         {
             ResponseApi<bool> response = new ResponseApi<bool>();
 
@@ -160,7 +160,34 @@ namespace FadiBackEndApI.Controllers
             }
             catch (Exception ex)
             {
-                response = new ResponseApi<bool>() { Status = false, Message = ex.Message};
+                response = new ResponseApi<bool>() { Status = false, Message = ex.Message };
+                return StatusCode(StatusCodes.Status500InternalServerError, response);
+            }
+        }
+
+        [HttpGet]
+        [Route("count/{id}")]
+        public async Task<IActionResult> CountEmployees([FromRoute]int id)
+        {
+            ResponseApi<int> response= new ResponseApi<int>();
+
+            try
+            {
+                int countEmployeesInDepartment = await _departmentService.CountEmployees(id);
+
+                if (countEmployeesInDepartment >= 0)
+                {
+                    response = new ResponseApi<int>() { Status = true, Message = "Ok", Value = countEmployeesInDepartment };
+                }
+                else
+                {
+                    response = new ResponseApi<int>() { Status = false, Message = "Could not count employees in this department", Value = -1 };
+                }
+                return StatusCode(StatusCodes.Status200OK, response);
+            }
+            catch (Exception ex)
+            {
+                response = new ResponseApi<int>() { Status = false, Message = ex.Message };
                 return StatusCode(StatusCodes.Status500InternalServerError, response);
             }
         }

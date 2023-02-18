@@ -13,5 +13,7 @@ namespace FadiBackEndApI.Services.Contract
         Task<Department> UpdateDepartment(Department department);
 
         Task<bool> DeleteDepartment(Department department);
+
+        Task<int> CountEmployees(int departmentId);
     }
 }

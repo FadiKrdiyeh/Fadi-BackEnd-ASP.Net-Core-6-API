@@ -2,7 +2,10 @@ using FadiBackEndApI.Models;
 using FadiBackEndApI.Services.Contract;
 using FadiBackEndApI.Services.Implementation;
 using FadiBackEndApI.Utilities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,13 +27,34 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("FadiAPIPolicyToAngularApplication", app =>
+    options.AddPolicy("FadiAPIPolicyToAngularApplication", policy =>
     {
-        app.AllowAnyOrigin()
+        //policy.AllowAnyOrigin()
+        policy.WithOrigins("http://localhost:4200")
         .AllowAnyHeader()
         .AllowAnyMethod();
     });
-}); 
+});
+
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+
+            ValidIssuer = "http://localhost:4200",
+            ValidAudience = "http://localhost:4200",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("F@diKrdiyeh@963WebDeveloperForThisAngular15ApplicationForFrontEndAndASP.NetCoreWebAPIForBackEnd"))
+        };
+    });
 
 var app = builder.Build();
 
@@ -44,6 +68,8 @@ if (app.Environment.IsDevelopment())
 app.UseCors("FadiAPIPolicyToAngularApplication");
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

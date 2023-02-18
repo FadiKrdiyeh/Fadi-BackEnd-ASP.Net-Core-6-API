@@ -81,5 +81,18 @@ namespace FadiBackEndApI.Services.Implementation
                 throw ex;
             }
         }
+
+        public async Task<int> CountEmployees(int departmentId)
+        {
+            try
+            {
+                int countEmployeesInDepartment = await _fadiDbContext.Employees.Where(emp => emp.FDepartmentId == departmentId).CountAsync();
+                return countEmployeesInDepartment;
+            }
+            catch (Exception ex) 
+            { 
+                throw ex;
+            }
+        }
     }
 }
