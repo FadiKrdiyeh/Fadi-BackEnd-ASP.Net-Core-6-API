@@ -45,16 +45,21 @@ builder.Services.AddAuthentication(opt =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
+            //ValidateIssuer = true,
+            //ValidateAudience = true,
+            ValidateIssuer = false,
+            ValidateAudience = false,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
 
             ValidIssuer = "http://localhost:4200",
             ValidAudience = "http://localhost:4200",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("F@diKrdiyeh@963WebDeveloperForThisAngular15ApplicationForFrontEndAndASP.NetCoreWebAPIForBackEnd"))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("F@diKrdiyeh@963WebDeveloperForThisAngular15ApplicationForFrontEndAndASP.NetCoreWebAPIForBackEnd")),
+            ClockSkew = TimeSpan.Zero
         };
     });
+
+//builder.Services.AddAuthorization();
 
 var app = builder.Build();
 

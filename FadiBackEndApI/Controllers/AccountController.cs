@@ -48,6 +48,7 @@ namespace FadiBackEndApI.Controllers
                         audience: "https://localhost:4200",
                         claims: new List<Claim>(),
                         expires: DateTime.Now.AddHours(3),
+                        //expires: DateTime.Now.AddSeconds(5),
                         signingCredentials: signingCredentials
                     );
 

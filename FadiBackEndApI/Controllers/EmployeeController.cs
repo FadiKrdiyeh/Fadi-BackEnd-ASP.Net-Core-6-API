@@ -3,13 +3,14 @@ using FadiBackEndApI.DTOs;
 using FadiBackEndApI.Models;
 using FadiBackEndApI.Services.Contract;
 using FadiBackEndApI.Utilities;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FadiBackEndApI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeSerivce _employeeService;
@@ -73,8 +74,8 @@ namespace FadiBackEndApI.Controllers
             catch (Exception ex)
             {
                 response = new ResponseApi<EmployeeDTO>() { Status = false, Message = ex.Message };
-                //return StatusCode(StatusCodes.Status500InternalServerError, response);
-                throw ex;
+                return StatusCode(StatusCodes.Status500InternalServerError, response);
+                //throw ex;
             }
         }
 

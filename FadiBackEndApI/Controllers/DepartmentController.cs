@@ -3,12 +3,14 @@ using FadiBackEndApI.DTOs;
 using FadiBackEndApI.Models;
 using FadiBackEndApI.Services.Contract;
 using FadiBackEndApI.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FadiBackEndApI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DepartmentController : ControllerBase
     {
         private readonly IDepartmentService _departmentService;
