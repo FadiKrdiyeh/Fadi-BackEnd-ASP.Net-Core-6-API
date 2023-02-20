@@ -3,8 +3,10 @@ using FadiBackEndApI.Services.Contract;
 using FadiBackEndApI.Services.Implementation;
 using FadiBackEndApI.Utilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +21,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<FadiDbContext>(options => 
     options.UseOracle(builder.Configuration.GetConnectionString("FadiConnectionString"))
 );
+
+
+//builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+//{
+//    options.Password.RequiredLength = 10;
+//    options.Password.RequiredUniqueChars = 3;
+//    options.Password.RequireNonAlphanumeric = false;
+//}).AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    options.User.RequireUniqueEmail = false;
+}).AddEntityFrameworkStores<FadiDbContext>();
 
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IEmployeeSerivce, EmployeeService>();

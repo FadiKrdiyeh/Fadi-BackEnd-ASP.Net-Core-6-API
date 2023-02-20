@@ -1,4 +1,7 @@
-﻿using FadiBackEndApI.Services.Contract;
+﻿using FadiBackEndApI.Models;
+using FadiBackEndApI.Services.Contract;
+using FadiBackEndApI.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -8,6 +11,11 @@ namespace FadiBackEndApI.Services.Implementation
 {
     public class AccountService : IAccountService
     {
+        public AccountService()
+        {
+
+        }
+
         public async Task<string> Login(string username, string password)
         {
             try
@@ -32,5 +40,21 @@ namespace FadiBackEndApI.Services.Implementation
                 throw ex;
             }
         }
+
+        //public async Task<List<IdentityUser>> GetUsers()
+        //{
+        //    try
+        //    {
+        //        //List<Department> department = new List<Department>();
+        //        //department = await _fadiDbContext.Departments.ToListAsync();
+        //        //return department;
+
+        //        List<IdentityUser> users = 
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
     }
 }

@@ -7,5 +7,7 @@ namespace FadiBackEndApI.Services.Contract
         Task<string> Login(string username, string password);
 
         //Task<string> Register(IdentityUser user);
+
+        //Task<List<IdentityUser>> GetUsers();
     }
 }
